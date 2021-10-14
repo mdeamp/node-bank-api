@@ -1,10 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const accountRoutes = require('./routes/account.routes');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+// Routes
+app.use('/account', accountRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).json({
