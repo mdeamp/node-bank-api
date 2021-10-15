@@ -25,7 +25,27 @@ const createAccount = async (account) => {
   return newAccount;
 };
 
+const updateAccount = async (account) => {
+  const updatedAccount = await models.Accounts.update(account, {
+    where: {
+      account_number: account.account_number,
+    },
+  });
+
+  console.log(updatedAccount);
+
+  if (updatedAccount[0] > 0) {
+    return {
+      ...account,
+      message: 'Account updated successfully!',
+    };
+  } else {
+    throw new Error('Not Found or Updated!');
+  }
+};
+
 module.exports = {
   getAccountByNumber,
   createAccount,
+  updateAccount,
 };
