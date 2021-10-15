@@ -4,7 +4,6 @@ const accountController = require('../controllers/account.controller');
 const router = express.Router();
 
 router.get('/:id', accountController.get);
-router.get('/:id/balance', accountController.getBalanceById);
-router.get('/:id/client', accountController.getClientById);
+router.post('/', accountController.create);
 
 module.exports = router;

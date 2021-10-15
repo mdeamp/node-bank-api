@@ -20,6 +20,12 @@ const getAccountByNumber = async (account_number) => {
   return accountMap;
 };
 
+const createAccount = async (account) => {
+  const newAccount = models.Accounts.create(account);
+  return newAccount;
+};
+
 module.exports = {
   getAccountByNumber,
+  createAccount,
 };
