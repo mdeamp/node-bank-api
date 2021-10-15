@@ -1,17 +1,16 @@
 const mocks = require('../mocks');
+const { getAccountByNumber } = require('../services/account.service');
 
-const getById = (req, res) => {
-  const account = mocks.accounts.find(
-    (acc) => acc.account_number === req.params.id
-  );
-
-  if (!account) {
+const get = async (req, res) => {
+  try {
+    const account = await getAccountByNumber(req.params.id);
+    res.status(200).json(account);
+  } catch (err) {
     res.status(404).json({
       message: `Não foi encontrada uma conta com este número: ${req.params.id}`,
+      error: err.toString(),
     });
   }
-
-  res.status(200).json(account);
 };
 
 const getBalanceById = (req, res) => {
@@ -43,7 +42,7 @@ const getClientById = (req, res) => {
 };
 
 module.exports = {
-  getById,
+  get,
   getBalanceById,
   getClientById,
 };
