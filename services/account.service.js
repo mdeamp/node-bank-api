@@ -32,8 +32,6 @@ const updateAccount = async (account) => {
     },
   });
 
-  console.log(updatedAccount);
-
   if (updatedAccount[0] > 0) {
     return {
       ...account,
@@ -44,8 +42,26 @@ const updateAccount = async (account) => {
   }
 };
 
+const removeAccount = async (account_number) => {
+  const removedAccount = await models.Accounts.destroy({
+    where: {
+      account_number: parseInt(account_number),
+    },
+  });
+
+  if (removedAccount > 0) {
+    return {
+      account_number,
+      message: 'Account removed successfully!',
+    };
+  } else {
+    throw new Error('Not Found or Removed!');
+  }
+};
+
 module.exports = {
   getAccountByNumber,
   createAccount,
   updateAccount,
+  removeAccount,
 };

@@ -43,8 +43,21 @@ const update = async (req, res) => {
   }
 };
 
+const remove = async (req, res) => {
+  try {
+    const removedAccount = await accountService.removeAccount(req.params.id);
+    res.status(200).json(removedAccount);
+  } catch (err) {
+    res.status(500).json({
+      message: 'Não foi possível remover esta conta!',
+      error: err.toString(),
+    });
+  }
+};
+
 module.exports = {
   get,
   create,
   update,
+  remove,
 };
