@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const accountRoutes = require('./routes/account.routes');
 const orderRoutes = require('./routes/order.routes');
+const loginRoutes = require('./routes/login.routes');
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 // Routes
 app.use('/account', accountRoutes);
 app.use('/orders', orderRoutes);
+app.use('/login', loginRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).json({
